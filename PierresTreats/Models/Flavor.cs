@@ -7,13 +7,13 @@ namespace PierresTreats.Models
 
     public Flavor()
     {
-      this.JoinPierresTreats = new HashSet<TreatFlavor>();
+      this.JoinPierresTreats = new HashSet<FlavorTreat>();
     }
 
     public int FlavorId { get; set; }
     public string Name { get; set; }
 
     public virtual ApplicationUser User { get; set; }
-    public virtual ICollection<TreatFlavor> JoinPierresTreats { get; set; }
+    public virtual ICollection<FlavorTreat> JoinPierresTreats { get; set; }
   }
 }
