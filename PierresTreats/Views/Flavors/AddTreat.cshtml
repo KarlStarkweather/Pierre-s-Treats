@@ -1,0 +1,34 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PierresTreats.Models.Flavor
+
+<h2>Add an Treat</h2>
+
+<h4>Add an treat to this flavor: @Html.DisplayFor(model => model.Name)</h4>
+<div class="w-50">
+  @using (Html.BeginForm())
+  {
+    @Html.HiddenFor(model => model.FlavorId)
+    <div class="form-group">
+        @Html.Label("Select treat")
+        @Html.DropDownList("TreatId", ViewBag.TreatId, "Select Treat", new { @class = "form-control"})
+    </div>
+    
+    <input type="submit" value="Save" class="btn btn-info btn-sm m-3"/>
+  }
+</div>
+
+@if (ViewBag.SuccessMessage !=null)
+{
+  @if (ViewBag.SuccessMessage != "Not a duplicate")
+  {
+    <text>
+      <script>
+        alert('This treat has already been added!');
+      </script>
+    </text>
+  }
+}
+<p>@Html.ActionLink("Back to list", "Index")</p>
