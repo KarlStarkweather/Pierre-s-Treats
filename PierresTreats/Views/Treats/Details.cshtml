@@ -1,0 +1,37 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PierresTreats.Models.Treat;
+
+<h2>Treat Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+
+@if(@ViewBag.UsersTreats.Count == 0)
+{
+  <p>None of your flavors use this treat.</p>
+}
+else
+{
+  <h4>Flavors that use this treat:</h4>
+
+  @foreach(var entry in ViewBag.UsersTreats)
+  {
+    @using (Html.BeginForm("DeleteFlavor", "Treats"))
+    {
+      int joinId = entry.FlavorTreatId;
+      <p>
+        @Html.Hidden("joinId", joinId)
+        <button type="submit" class="btn btn-danger btn-sm" value="Delete">
+          Delete
+        </button>
+        @entry.Flavor.Name 
+      </p>
+    }
+  }
+}
+
+@Html.ActionLink("Back to list", "Index", new {}, new { @class = "btn btn-primary"})
+@Html.ActionLink("Edit Treat", "Edit", new { id = Model.TreatId }, new { @class = "btn btn-primary"})
+@Html.ActionLink("Delete Treat", "Delete", new { id = Model.TreatId }, new { @class = "btn btn-primary"})
